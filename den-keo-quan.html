@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập 39 - Đèn Kéo Quân (231A011025)</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .info-sv {
+            margin-bottom: 30px;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        /* Khung chứa không gian 3D */
+        .scene {
+            width: 250px;
+            height: 350px;
+            perspective: 1000px;
+        }
+
+        /* Lồng đèn 6 mặt */
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateLantern 12s linear infinite;
+        }
+
+        /* Hiệu ứng dừng khi rê chuột vào lồng đèn */
+        .carousel.paused {
+            animation-play-state: paused;
+        }
+
+        /* Các mặt của đèn kéo quân */
+        .carousel__face {
+            position: absolute;
+            width: 200px;
+            height: 280px;
+            left: 25px;
+            top: 35px;
+            border: 3px solid #ffeb3b;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 235, 59, 0.6);
+            background: #fff;
+        }
+
+        .carousel__face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Định vị 6 mặt theo hình lăng trụ lục giác (Góc quay = i * 60 độ, Khoảng cách trục Z = ~185px) */
+        .carousel__face:nth-child(1) { transform: rotateY(0deg) translateZ(185px); }
+        .carousel__face:nth-child(2) { transform: rotateY(60deg) translateZ(185px); }
+        .carousel__face:nth-child(3) { transform: rotateY(120deg) translateZ(185px); }
+        .carousel__face:nth-child(4) { transform: rotateY(180deg) translateZ(185px); }
+        .carousel__face:nth-child(5) { transform: rotateY(240deg) translateZ(185px); }
+        .carousel__face:nth-child(6) { transform: rotateY(300deg) translateZ(185px); }
+
+        /* Keyframes quay vòng tròn */
+        @keyframes rotateLantern {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(-360deg); }
+        }
+
+        .back-btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #ffeb3b;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #fbc02d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bài tập 39 - Hiệu ứng Đèn Kéo Quân</h1>
+    <div class="info-sv">Sinh viên: Huỳnh Anh Thái | MSV: 231A011025</div>
+
+    <!-- Khung đèn 3D -->
+    <div class="scene">
+        <div class="carousel" id="lantern">
+            <div class="carousel__face"><img src="images/hinh1.jpg" alt="Mặt 1"></div>
+            <div class="carousel__face"><img src="images/hinh2.jpg" alt="Mặt 2"></div>
+            <div class="carousel__face"><img src="images/hinh3.jpg" alt="Mặt 3"></div>
+            <div class="carousel__face"><img src="images/hinh4.jpg" alt="Mặt 4"></div>
+            <div class="carousel__face"><img src="images/hinh5.jpg" alt="Mặt 5"></div>
+            <div class="carousel__face"><img src="images/hinh6.jpg" alt="Mặt 6"></div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-btn">Quay lại Trang Chủ</a>
+
+    <script>
+        const lantern = document.getElementById('lantern');
+
+        // Khi rê chuột vào -> Dừng quay
+        lantern.addEventListener('mouseenter', () => {
+            lantern.classList.add('paused');
+        });
+
+        // Khi rê chuột ra -> Tiếp tục quay
+        lantern.addEventListener('mouseleave', () => {
+            lantern.classList.remove('paused');
+        });
+    </script>
+
+</body>
+</html>
